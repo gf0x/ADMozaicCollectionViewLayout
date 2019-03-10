@@ -119,11 +119,16 @@ open class ADMozaikLayout: UICollectionViewFlowLayout {
             return CGSize.zero
         }
         let contentSize = super.collectionViewContentSize
-        let delta = collectionView.bounds.height - collectionView.contentInset.top - collectionView.contentInset.bottom
+        let verticalDelta = collectionView.bounds.height - collectionView.contentInset.top - collectionView.contentInset.bottom
         let layoutGeometriesContentHeight = layoutGeometries.reduce(0) { result, geometry in
             return result + geometry.contentHeight
         }
-        return CGSize(width: contentSize.width, height: max(layoutGeometriesContentHeight, delta));
+		let horizontalDelta = collectionView.bounds.width - (collectionView.contentInset.left + collectionView.contentInset.right)
+		let layoutGeometriesContentWidth = layoutGeometries.reduce(0) { result, geometry in
+			return result + geometry.contentWidth
+		}
+        return CGSize(width: max(layoutGeometriesContentWidth, horizontalDelta),
+					  height: max(layoutGeometriesContentHeight, verticalDelta));
     }
     
     open override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {

@@ -19,7 +19,7 @@ class ADMozaikLayoutSectionGeometry {
     private let geometryInfo: ADMozaikLayoutSectionGeometryInfo
     
     /// Layout content width
-    private let contentWidth: CGFloat
+    private(set) var contentWidth: CGFloat
     
     ///
     /// Initializes the layout geometry instance
